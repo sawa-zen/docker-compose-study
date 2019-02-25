@@ -1,0 +1,18 @@
+version: "3"
+services:
+  nodejs:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./nodejs/
+    ports:
+      - 3000:3000
+  nginx:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./nginx/
+    ports:
+      - 8080:80
+    env:
+      - HOGE: https://nodejs:3000
+    depends_on:
+      - nodejs
